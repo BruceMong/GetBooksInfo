@@ -35,85 +35,218 @@
             <h1>Retrieve all books (title, author(s), date) that contain a specific word, then export them to PDF or Excel.</h1>
         </header>
 
-        <div class="container">
-            <section>
 
-                <form id="form" onsubmit="return false;">
-                    <div>
-                        <label for="apikey">Please enter your google books API key : </label>
-                        <input name="apikey" id="apikey">
-                        <img class="tooltipApi" src="./img/helpIco.png" />
-                        <div class="tooltipApi-content">
-                            <p>Créez gratuitement votre clé API Google Books sur le lien suivant:</p>
-                            <a href="https://console.cloud.google.com/apis/credentials?hl=fr">https://console.cloud.google.com/apis/credentials?hl=fr</a>
-                        </div>
-                    </div>
-                    <div>
-                        <label for="langue">Restrict language :</label>
-                        <select name="langue">
+        <!-- The Modal -->
+        <div id="modalInfo" class="modalInfo">
+
+            <!-- Modal content -->
+            <div class="modal-content">
+                <span class="close">&times;</span>
+
+                <ol>
+                    <li>Go to the Google Cloud Platform development console page: <a>https://console.cloud.google.com/</a></li>
+                    <li>Log in to your Google account or create one if you don't have one.</li>
+                    <li>Click on the "Select a project" button at the top of the page, then click on the "New project" button to create a new project.</li>
+                    <li>Give your project a name and click "Create."</li>
+                    <li>Once your project is created, click on the menu icon in the top left of the page, then click on "APIs & Services."</li>
+                    <li>Click on the "Library" button to search for the Google Books API. Find the Google Books API and click "Enable."</li>
+                    <li>Once the API is enabled, click on the "Create Credentials" button to create an API key.</li>
+                    <li>Select "API key" and click "Create" to generate your API key.</li>
+                    <li>Copy your API key and paste it in the Google Books API input.</li>
+                </ol>
+
+            </div>
+
+        </div>
+        <section>
+
+            <form id="form" onsubmit="return false;">
+                <div>
+                    <label for="apikey">Please enter your google books API key : </label>
+                    <input name="apikey" id="apikey">
+                    <img id="modalButton" class="tooltipApi" src="./img/helpIco.png" />
+                </div>
+                <div>
+
+                </div>
+                <div>
+                    <label for="langue">Restrict language :</label>
+                    <select name="langue" id="langRestrict">
                         <option value="" title="">none</option>
-                        <option value="eng_us_2019" title="Books predominantly in the English language that were published in the United States.">American English 2019</option>
-                        <option value="eng_us_2012" title="Books predominantly in the English language that were published in the United States.">American English 2012</option>
-                        <option value="eng_us_2009" title="Books predominantly in the English language that were published in the United States.">American English 2009</option>
-                        <option value="eng_gb_2019" title="Books predominantly in the English language that were published in Great Britain.">British English 2019</option>
-                        <option value="eng_gb_2012" title="Books predominantly in the English language that were published in Great Britain.">British English 2012</option>
-                        <option value="eng_gb_2009" title="Books predominantly in the English language that were published in Great Britain.">British English 2009</option>
-                        <option value="eng_2019" title="Books predominantly in the English language published in any country.">English 2019</option>
-                        <option value="eng_2012" title="Books predominantly in the English language published in any country.">English 2012</option>
-                        <option value="eng_2009" title="Books predominantly in the English language published in any country.">English 2009</option>
-                        <option value="eng_fiction_2019" title="Books predominantly in the English language that a library or publisher identified as fiction.">English Fiction 2019</option>
-                        <option value="eng_fiction_2012" title="Books predominantly in the English language that a library or publisher identified as fiction.">English Fiction 2012</option>
-                        <option value="eng_fiction_2009" title="Books predominantly in the English language that a library or publisher identified as fiction.">English Fiction 2009</option>
-                        <option value="eng_1m_2009" title="The &quot;Google Million&quot;. All are in English with dates ranging from 1500 to 2008. No more than about 6000 books were chosen from any one year, which means that all of the scanned books from early years are present, and books from later years are randomly sampled. The random samplings reflect the subject distributions for the year (so there are more computer books in 2000 than 1980).">English One Million</option>
-                        <option value="chi_sim_2019" title="Books predominantly in simplified Chinese script.">Chinese 2019</option>
-                        <option value="fre_2019" title="Books predominantly in the French language.">French 2019</option>
-                        <option value="fre_2012" title="Books predominantly in the French language.">French 2012</option>
-                        <option value="fre_2009" title="Books predominantly in the French language.">French 2009</option>
-                        <option value="ger_2019" title="Books predominantly in the German language.">German 2019</option>
-                        <option value="ger_2012" title="Books predominantly in the German language.">German 2012</option>
-                        <option value="ger_2009" title="Books predominantly in the German language.">German 2009</option>
-                        <option value="heb_2019" title="Books predominantly in the Hebrew language.">Hebrew 2019</option>
-                        <option value="heb_2012" title="Books predominantly in the Hebrew language.">Hebrew 2012</option>
-                        <option value="heb_2009" title="Books predominantly in the Hebrew language.">Hebrew 2009</option>
-                        <option value="spa_2019" title="Books predominantly in the Spanish language.">Spanish 2019</option>
-                        <option value="spa_2012" title="Books predominantly in the Spanish language.">Spanish 2012</option>
-                        <option value="spa_2009" title="Books predominantly in the Spanish language.">Spanish 2009</option>
-                        <option value="rus_2019" title="Books predominantly in the Russian language.">Russian 2019</option>
-                        <option value="rus_2012" title="Books predominantly in the Russian language.">Russian 2012</option>
-                        <option value="rus_2009" title="Books predominantly in the Russian language.">Russian 2009</option>
-                        <option value="ita_2019" title="Books predominantly in the Italian language.">Italian 2019</option>
-                        <option value="ita_2012" title="Books predominantly in the Italian language.">Italian 2012</option>
+                        <option value="af"> Afrikaans</option>
+                        <option value="ak"> Akan</option>
+                        <option value="sq"> Albanian</option>
+                        <option value="ws"> Samoa</option>
+                        <option value="am"> Amharic</option>
+                        <option value="ar"> Arabic</option>
+                        <option value="hy"> Armenian</option>
+                        <option value="az"> Azerbaijani</option>
+                        <option value="eu"> Basque</option>
+                        <option value="be"> Belarusian</option>
+                        <option value="bem"> Bemba</option>
+                        <option value="bn"> Bengali</option>
+                        <option value="bh"> Bihari</option>
+                        <option value="bs"> Bosnian</option>
+                        <option value="br"> Breton</option>
+                        <option value="bg"> Bulgarian</option>
+                        <option value="bt"> Bhutanese</option>
+                        <option value="km"> Cambodian</option>
+                        <option value="ca"> Catalan</option>
+                        <option value="chr"> Cherokee</option>
+                        <option value="ny"> Chichewa</option>
+                        <option value="zh-cn"> Chinese (Simplified)</option>
+                        <option value="zh-tw"> Chinese (Traditional)</option>
+                        <option value="co"> Corsican</option>
+                        <option value="hr"> Croatian</option>
+                        <option value="cs"> Czech</option>
+                        <option value="da"> Danish</option>
+                        <option value="nl"> Dutch</option>
+                        <option value="en"> English</option>
+                        <option value="eo"> Esperanto</option>
+                        <option value="et"> Estonian</option>
+                        <option value="ee"> Ewe</option>
+                        <option value="fo"> Faroese</option>
+                        <option value="tl"> Filipino</option>
+                        <option value="fi"> Finnish</option>
+                        <option value="fr"> French</option>
+                        <option value="fy"> Frisian</option>
+                        <option value="gaa"> Ga</option>
+                        <option value="gl"> Galician</option>
+                        <option value="ka"> Georgian</option>
+                        <option value="de"> German</option>
+                        <option value="el"> Greek</option>
+                        <option value="kl"> Greenlandic</option>
+                        <option value="gn"> Guarani</option>
+                        <option value="gu"> Gujarati</option>
+                        <option value="ht"> Haitian Creole</option>
+                        <option value="ha"> Hausa</option>
+                        <option value="haw"> Hawaiian</option>
+                        <option value="iw"> Hebrew</option>
+                        <option value="hi"> Hindi</option>
+                        <option value="hu"> Hungarian</option>
+                        <option value="is"> Icelandic</option>
+                        <option value="ig"> Igbo</option>
+                        <option value="id"> Indonesian</option>
+                        <option value="ia"> Interlingua</option>
+                        <option value="ga"> Irish</option>
+                        <option value="it"> Italian</option>
+                        <option value="ja"> Japanese</option>
+                        <option value="jw"> Javanese</option>
+                        <option value="kn"> Kannada</option>
+                        <option value="kk"> Kazakh</option>
+                        <option value="rw"> Kinyarwanda</option>
+                        <option value="rn"> Kirundi</option>
+                        <option value="kg"> Kongo</option>
+                        <option value="ko"> Korean"</option>
+                        <option value="kri"> Krio (Sierra Leone)</option>
+                        <option value="ku"> Kurdish</option>
+                        <option value="ckb"> Kurdish (Soranî)</option>
+                        <option value="ky"> Kyrgyz</option>
+                        <option value="lo"> Laothian</option>
+                        <option value="la"> Latin</option>
+                        <option value="lv"> Latvian</option>
+                        <option value="ln"> Lingala</option>
+                        <option value="lt"> Lithuanian</option>
+                        <option value="loz"> Lozi</option>
+                        <option value="lg"> Luganda</option>
+                        <option value="ach"> Luo</option>
+                        <option value="mk"> Macedonian</option>
+                        <option value="mg"> Malagasy</option>
+                        <option value="my"> Malay</option>
+                        <option value="ml"> Malayalam</option>
+                        <option value="mt"> Maltese</option>
+                        <option value="mv"> Maldives</option>
+                        <option value="mi"> Maori</option>
+                        <option value="mr"> Marathi</option>
+                        <option value="mfe"> Mauritian Creole</option>
+                        <option value="mo"> Moldavian</option>
+                        <option value="mn"> Mongolian</option>
+                        <option value="sr-me"> Montenegrin</option>
+                        <option value="ne"> Nepali</option>
+                        <option value="pcm"> Nigerian Pidgin</option>
+                        <option value="nso"> Northern Sotho</option>
+                        <option value="no"> Norwegian"</option>
+                        <option value="nn"> Norwegian (Nynorsk)</option>
+                        <option value="oc"> Occitan</option>
+                        <option value="or"> Oriya</option>
+                        <option value="om"> Oromo</option>
+                        <option value="ps"> Pashto</option>
+                        <option value="fa"> Persian</option>
+                        <option value="pl"> Polish</option>
+                        <option value="pt"> Portuguese</option>
+                        <option value="pt-br"> Portuguese (Brazil)</option>
+                        <option value="pt-pt"> Portuguese (Portugal)</option>
+                        <option value="pa"> Punjabi</option>
+                        <option value="qu"> Quechua</option>
+                        <option value="ro"> Romanian</option>
+                        <option value="rm"> Romansh</option>
+                        <option value="nyn"> Runyakitara</option>
+                        <option value="ru"> Russian</option>
+                        <option value="gd"> Scots Gaelic</option>
+                        <option value="sr"> Serbian</option>
+                        <option value="sh"> Serbo-Croatian</option>
+                        <option value="st"> Sesotho</option>
+                        <option value="tn"> Setswana</option>
+                        <option value="crs"> Seychellois Creole</option>
+                        <option value="sn"> Shona</option>
+                        <option value="sd"> Sindhi</option>
+                        <option value="si"> Sinhalese</option>
+                        <option value="sk"> Slovak</option>
+                        <option value="sl"> Slovenian</option>
+                        <option value="so"> Somali</option>
+                        <option value="es"> Spanish</option>
+                        <option value="es-419"> Spanish (Latin American)</option>
+                        <option value="su"> Sundanese</option>
+                        <option value="sw"> Swahili</option>
+                        <option value="sv"> Swedish</option>
+                        <option value="tg"> Tajik</option>
+                        <option value="ta"> Tamil</option>
+                        <option value="tt"> Tatar</option>
+                        <option value="te"> Telugu</option>
+                        <option value="th"> Thai</option>
+                        <option value="ti"> Tigrinya</option>
+                        <option value="to"> Tonga</option>
+                        <option value="lua"> Tshiluba</option>
+                        <option value="tum"> Tumbuka</option>
+                        <option value="tr"> Turkish</option>
+                        <option value="tk"> Turkmen</option>
+                        <option value="tw"> Twi</option>
+                        <option value="ug"> Uighur</option>
+                        <option value="uk"> Ukrainian</option>
+                        <option value="ur"> Urdu</option>
+                        <option value="uz"> Uzbek</option>
+                        <option value="vu"> Vanuatu</option>
+                        <option value="vi"> Vietnamese</option>
+                        <option value="cy"> Welsh</option>
+                        <option value="wo"> Wolof</option>
+                        <option value="xh"> Xhosa</option>
+                        <option value="yi"> Yiddish</option>
+                        <option value="yo"> Yoruba</option>
+                        <option value="zu"> Zulu</option>
                     </select>
-                    </div>
-                    <div>
-                        <label for="years">Choose years :</label>
-                        <input type="number" name="years" id="years_start" min="1500" max="2019" value="1500">
-                        <label for="years"> to </label>
-                        <input type="number" name="years" id="years_end" min="1500" max="2019" value="2019">
-                    </div>
-                    <div>
-                        <label for="numInput">Items numbers</label>
-                        <input type="number" name="numInput" id="numInput" min="0" step="10" max="99999" value="100" required>
-                    </div>
-                    <div>
-                        <label for="occuSearch">Search word(s) :</label>
-                        <input name="occuSearch" id="search-text" placeholder="Enter your research here" autocomplete="off" />
-                        <button id="search-button">click</button>
-                    </div>
+                </div>
+                <div>
+                    <label for="itemNumber">Items numbers</label>
+                    <input type="number" name="itemNumber" id="itemNumber" min="40" step="40" max="99999" value="120" required>
+                </div>
+                <div>
+                    <label for="occuSearch">Search word(s) :</label>
+                    <input name="occuSearch" id="search-text" placeholder="Enter your research here" autocomplete="off" />
+                    <button id="search-button">click</button>
+                </div>
 
-                </form>
-            </section>
+            </form>
+        </section>
 
-            <!-- Create the DataTable -->
-            <table id="example" class="display" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Titre</th>
-                        <th>Auteur</th>
-                        <th>Date de publication</th>
-                    </tr>
-                </thead>
-            </table>
+        <!-- Create the DataTable -->
+        <table id="example" class="display" style="width:100%">
+            <thead>
+
+            </thead>
+        </table>
+        <footer>
+            <p>&copy; 2023 MONG-THE Bruce. Tous droits réservés.</p>
+        </footer>
     </body>
     <script type="module" src="/main.js"></script>
     </div>
