@@ -1,0 +1,56 @@
+body {
+    padding: 1em;
+    font-family: 'Roboto';
+    //background-color: #0FA2BD;
+}
+
+header {
+    img {
+        width: 610px;
+    }
+    h1 {
+        padding-left: 30px;
+        padding-top: 15px;
+        font-size: 1.2em;
+    }
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    border: solid;
+    padding: 1em;
+    margin-left: 2em;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    img {
+        margin-left: 7px;
+        width: 27px;
+    }
+    input {
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+}
+
+#apikey {
+    margin-bottom: 20px;
+}
+
+
+/* Le style de l'info-bulle */
+
+.tooltipApi-content {
+    display: none;
+}
+
+.tooltipApi:hover+.hide {
+    display: block;
+    color: red;
+}
+
+.container {
+    // display: flex;
+    // margin: 0;
+}

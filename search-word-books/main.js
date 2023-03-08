@@ -74,7 +74,7 @@ async function getBooks() {
                     const volumeInfo = book.volumeInfo;
                     return {
                         title: volumeInfo.title || 'Titre inconnu',
-                        author: volumeInfo.authors ? volumeInfo.authors.join(', ') : 'Auteur inconnu',
+                        authors: volumeInfo.authors ? volumeInfo.authors.join(', ') : 'Auteur inconnu',
                         date: volumeInfo.publishedDate || 'Date inconnue'
                     }
                 }));
@@ -87,11 +87,35 @@ async function getBooks() {
             console.log(e)
         }
     }
-
     console.log(books)
-    return books;
+    displayBooksInDataTable(books)
+        //return books;
+    return
 }
 
+const displayBooksInDataTable = (books) => {
+    // Initialiser le tableau DataTables
+    if (table != null) {
+        table.destroy();
+    }
+
+    table = $('#example').DataTable({
+        data: books,
+        columns: [
+            { data: 'title' },
+            { data: 'authors' },
+            { data: 'date' }
+        ],
+        dom: 'Bfrtip',
+        buttons: [
+            'copy', 'csv', 'excel'
+        ]
+    });
+
+    // Afficher le tableau
+    // $('#example').show();
+
+}
 
 // Fonction pour effectuer la requête à l'API
 // const getBooks = () => {

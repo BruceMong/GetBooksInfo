@@ -30,36 +30,92 @@
 
 
     <body>
+        <header>
+            <img src="./img/getBooksInfo.png" />
+            <h1>Retrieve all books (title, author(s), date) that contain a specific word, then export them to PDF or Excel.</h1>
+        </header>
 
-        <section>
-            <select id="langue" name="langue">
-                <option value="en">Anglais</option>
-                <option value="fr">Français</option>
-                <option value="al">Allemand</option>
-                <option value="bel">Belge</option>
-              </select>
+        <div class="container">
+            <section>
 
+                <form id="form" onsubmit="return false;">
+                    <div>
+                        <label for="apikey">Please enter your google books API key : </label>
+                        <input name="apikey" id="apikey">
+                        <img class="tooltipApi" src="./img/helpIco.png" />
+                        <div class="tooltipApi-content">
+                            <p>Créez gratuitement votre clé API Google Books sur le lien suivant:</p>
+                            <a href="https://console.cloud.google.com/apis/credentials?hl=fr">https://console.cloud.google.com/apis/credentials?hl=fr</a>
+                        </div>
+                    </div>
+                    <div>
+                        <label for="langue">Restrict language :</label>
+                        <select name="langue">
+                        <option value="" title="">none</option>
+                        <option value="eng_us_2019" title="Books predominantly in the English language that were published in the United States.">American English 2019</option>
+                        <option value="eng_us_2012" title="Books predominantly in the English language that were published in the United States.">American English 2012</option>
+                        <option value="eng_us_2009" title="Books predominantly in the English language that were published in the United States.">American English 2009</option>
+                        <option value="eng_gb_2019" title="Books predominantly in the English language that were published in Great Britain.">British English 2019</option>
+                        <option value="eng_gb_2012" title="Books predominantly in the English language that were published in Great Britain.">British English 2012</option>
+                        <option value="eng_gb_2009" title="Books predominantly in the English language that were published in Great Britain.">British English 2009</option>
+                        <option value="eng_2019" title="Books predominantly in the English language published in any country.">English 2019</option>
+                        <option value="eng_2012" title="Books predominantly in the English language published in any country.">English 2012</option>
+                        <option value="eng_2009" title="Books predominantly in the English language published in any country.">English 2009</option>
+                        <option value="eng_fiction_2019" title="Books predominantly in the English language that a library or publisher identified as fiction.">English Fiction 2019</option>
+                        <option value="eng_fiction_2012" title="Books predominantly in the English language that a library or publisher identified as fiction.">English Fiction 2012</option>
+                        <option value="eng_fiction_2009" title="Books predominantly in the English language that a library or publisher identified as fiction.">English Fiction 2009</option>
+                        <option value="eng_1m_2009" title="The &quot;Google Million&quot;. All are in English with dates ranging from 1500 to 2008. No more than about 6000 books were chosen from any one year, which means that all of the scanned books from early years are present, and books from later years are randomly sampled. The random samplings reflect the subject distributions for the year (so there are more computer books in 2000 than 1980).">English One Million</option>
+                        <option value="chi_sim_2019" title="Books predominantly in simplified Chinese script.">Chinese 2019</option>
+                        <option value="fre_2019" title="Books predominantly in the French language.">French 2019</option>
+                        <option value="fre_2012" title="Books predominantly in the French language.">French 2012</option>
+                        <option value="fre_2009" title="Books predominantly in the French language.">French 2009</option>
+                        <option value="ger_2019" title="Books predominantly in the German language.">German 2019</option>
+                        <option value="ger_2012" title="Books predominantly in the German language.">German 2012</option>
+                        <option value="ger_2009" title="Books predominantly in the German language.">German 2009</option>
+                        <option value="heb_2019" title="Books predominantly in the Hebrew language.">Hebrew 2019</option>
+                        <option value="heb_2012" title="Books predominantly in the Hebrew language.">Hebrew 2012</option>
+                        <option value="heb_2009" title="Books predominantly in the Hebrew language.">Hebrew 2009</option>
+                        <option value="spa_2019" title="Books predominantly in the Spanish language.">Spanish 2019</option>
+                        <option value="spa_2012" title="Books predominantly in the Spanish language.">Spanish 2012</option>
+                        <option value="spa_2009" title="Books predominantly in the Spanish language.">Spanish 2009</option>
+                        <option value="rus_2019" title="Books predominantly in the Russian language.">Russian 2019</option>
+                        <option value="rus_2012" title="Books predominantly in the Russian language.">Russian 2012</option>
+                        <option value="rus_2009" title="Books predominantly in the Russian language.">Russian 2009</option>
+                        <option value="ita_2019" title="Books predominantly in the Italian language.">Italian 2019</option>
+                        <option value="ita_2012" title="Books predominantly in the Italian language.">Italian 2012</option>
+                    </select>
+                    </div>
+                    <div>
+                        <label for="years">Choose years :</label>
+                        <input type="number" name="years" id="years_start" min="1500" max="2019" value="1500">
+                        <label for="years"> to </label>
+                        <input type="number" name="years" id="years_end" min="1500" max="2019" value="2019">
+                    </div>
+                    <div>
+                        <label for="numInput">Items numbers</label>
+                        <input type="number" name="numInput" id="numInput" min="0" step="10" max="99999" value="100" required>
+                    </div>
+                    <div>
+                        <label for="occuSearch">Search word(s) :</label>
+                        <input name="occuSearch" id="search-text" placeholder="Enter your research here" autocomplete="off" />
+                        <button id="search-button">click</button>
+                    </div>
 
-            <form id="form" onsubmit="return false;">
-                <label for="langue">Choisir une langue :</label>
+                </form>
+            </section>
 
-                <input type="number" name="numInput" id="numInput" min="0" step="10" max="99999" value="100" required>
-                <input id="search-text" placeholder="Enter your research here" autocomplete="of1f" />
-                <button id="search-button">click</button>
-            </form>
-        </section>
-
-        <!-- Create the DataTable -->
-        <table id="example" class="display" style="width:100%">
-            <thead>
-                <tr>
-                    <th>Titre</th>
-                    <th>Auteur</th>
-                    <th>Date de publication</th>
-                </tr>
-            </thead>
-        </table>
+            <!-- Create the DataTable -->
+            <table id="example" class="display" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Titre</th>
+                        <th>Auteur</th>
+                        <th>Date de publication</th>
+                    </tr>
+                </thead>
+            </table>
     </body>
     <script type="module" src="/main.js"></script>
+    </div>
 
 </html>
