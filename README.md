@@ -2,9 +2,9 @@
 
 ## About The Project
 
-![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)(brucemong.github.io/GetBooksInfo)
+![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)(https://brucemong.github.io/GetBooksInfo)
 
-Website url : (brucemong.github.io/GetBooksInfo/)brucemong.github.io/GetBooksInfo
+Website url : [brucemong.github.io/GetBooksInfo](https://brucemong.github.io/GetBooksInfo/)
 
 This project allows you to retrieve information from books that contain a specific word and then export that information to CSV or XLSX.
 
