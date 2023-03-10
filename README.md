@@ -2,18 +2,19 @@
 
 ## About The Project
 
-![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)
+![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)(brucemong.github.io/GetBooksInfo)
 
-website url : [brucemong.github.io/GetBooksInfo/] brucemong.github.io/GetBooksInfo
+Website url : (brucemong.github.io/GetBooksInfo/)brucemong.github.io/GetBooksInfo
+
 This project allows you to retrieve information from books that contain a specific word and then export that information to CSV or XLSX.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 ### Dependencies
 
-- [![Bootstrap][bootstrap.com]][bootstrap-url]
-- [![JQuery][jquery.com]][jquery-url]
-- [![DataTables][https://datatables.net/][datatables-url]
+- Bootstrap
+- Jquery
+- DataTables
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
