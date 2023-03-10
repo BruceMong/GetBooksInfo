@@ -2,7 +2,7 @@
 
 ## About The Project
 
-![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)(https://brucemong.github.io/GetBooksInfo)
+![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)
 
 Website url : [brucemong.github.io/GetBooksInfo](https://brucemong.github.io/GetBooksInfo/)
 
