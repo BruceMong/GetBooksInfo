@@ -5,7 +5,7 @@
 
 ## About The Project
 
-![Overview](https://github.com/BruceMong/GetBooksInfo/public/img/GetBooksInfo.png?raw=true)
+![Overview](https://github.com/BruceMong/GetBooksInfo/blob/main/public/img/overview.png?raw=true)
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
 There are many great README templates available on GitHub; however, I didn't find one that really suited my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
