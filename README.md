@@ -7,6 +7,7 @@
 Website url : [brucemong.github.io/GetBooksInfo](https://brucemong.github.io/GetBooksInfo/)
 
 This project allows you to retrieve information from books that contain a specific word and then export that information to CSV or XLSX.
+This project uses the Google Books API to retrieve book information.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
