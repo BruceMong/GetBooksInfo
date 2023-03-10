@@ -3,10 +3,11 @@
 
 <head>
     <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <link rel="icon" href="/public/img/getBooksInfoIco.ico" />
+    <title>getBooksInfo</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
+    <link rel="stylesheet" href="style.css">
 
     <!-- Include the required libraries -->
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
@@ -30,47 +31,59 @@
 
 
     <body>
-        <header>
-            <img src="./img/getBooksInfo.png" />
-            <h1>Retrieve all books (title, author(s), date) that contain a specific word, then export them to PDF or Excel.</h1>
-        </header>
+
+        <div id="loader">
+            <div class="progress">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+            </div>
+        </div>
 
 
         <!-- The Modal -->
         <div id="modalInfo" class="modalInfo">
 
             <!-- Modal content -->
-            <div class="modal-content">
+            <div class="modal-contentApi">
                 <span class="close">&times;</span>
 
-                <ol>
-                    <li>Go to the Google Cloud Platform development console page: <a>https://console.cloud.google.com/</a></li>
-                    <li>Log in to your Google account or create one if you don't have one.</li>
-                    <li>Click on the "Select a project" button at the top of the page, then click on the "New project" button to create a new project.</li>
-                    <li>Give your project a name and click "Create."</li>
-                    <li>Once your project is created, click on the menu icon in the top left of the page, then click on "APIs & Services."</li>
-                    <li>Click on the "Library" button to search for the Google Books API. Find the Google Books API and click "Enable."</li>
-                    <li>Once the API is enabled, click on the "Create Credentials" button to create an API key.</li>
-                    <li>Select "API key" and click "Create" to generate your API key.</li>
-                    <li>Copy your API key and paste it in the Google Books API input.</li>
-                </ol>
+                <ul>
+                    <li>When creating a query, list search terms separated by a '+', in the form q=term1+term2_term3. (Alternatively, you can separate them with a space, but as with all of the query parameter values, the spaces must then be URL encoded.)
+                        The API returns all entries that match all of the search terms (like using AND between terms). Like Google's web search, the API searches on complete words (and related words with the same stem), not substrings.</li>
+                    <li>To search for an exact phrase, enclose the phrase in quotation marks: q="exact phrase".</li>
+                    <li>To exclude entries that match a given term, use the form q=-term.</li>
+                    <li>The search terms are case-insensitive.</li>
+                    <li>Example: to search for all entries that contain the exact phrase "Elizabeth Bennet" and the word "Darcy" but don't contain the word "Austen", use the following query parameter value: q="Elizabeth+Bennet"+Darcy-Austen
+                    </li>
+                    <li>There are special (case-sensitive) keywords you can specify in the search terms to search in particular fields, such as:
+                        <ul>
+                            <li>intitle: Returns results where the text following this keyword is found in the title.</li>
+                            <li>inauthor: Returns results where the text following this keyword is found in the author.</li>
+                            <li>inpublisher: Returns results where the text following this keyword is found in the publisher.</li>
+                            <li>subject: Returns results where the text following this keyword is listed in the category list of the volume.</li>
+                            <li>isbn: Returns results where the text following this keyword is the ISBN number.</li>
+                            <li>lccn: Returns results where the text following this keyword is the Library of Congress Control Number.</li>
+                            <li>oclc: Returns results where the text following this keyword is the Online Computer Library Center number.</li>
+                        </ul>
+                    </li>
+
+                </ul>
 
             </div>
 
         </div>
+
+        <header>
+            <img src="/public/img/getBooksInfo.png " />
+            <h1>Retrieve all information from books that contain a specific word, then export it to csv or xlsx.</h1>
+        </header>
+
+
         <section>
 
             <form id="form" onsubmit="return false;">
-                <div>
-                    <label for="apikey">Please enter your google books API key : </label>
-                    <input name="apikey" id="apikey">
-                    <img id="modalButton" class="tooltipApi" src="./img/helpIco.png" />
-                </div>
-                <div>
 
-                </div>
                 <div>
-                    <label for="langue">Restrict language :</label>
+                    <label title="Restricts the volumes returned to those that are tagged with the specified language." for="langue">Restrict language :</label>
                     <select name="langue" id="langRestrict">
                         <option value="" title="">none</option>
                         <option value="af"> Afrikaans</option>
@@ -226,13 +239,17 @@
                     </select>
                 </div>
                 <div>
-                    <label for="itemNumber">Items numbers</label>
+                    <label for="itemNumber">Items numbers :</label>
                     <input type="number" name="itemNumber" id="itemNumber" min="40" step="40" max="99999" value="120" required>
+                    <label title="The position in the collection at which to start the list of results" for="startIndex">Start index :</label>
+                    <input type="number" name="startIndex" id="startIndex" min="0" value="0" required>
                 </div>
+
                 <div>
                     <label for="occuSearch">Search word(s) :</label>
                     <input name="occuSearch" id="search-text" placeholder="Enter your research here" autocomplete="off" />
-                    <button id="search-button">click</button>
+                    <button id="search-button">Click</button>
+                    <img id="modalButton" class="tooltipApi" src="/public/img/helpIco.png" />
                 </div>
 
             </form>
@@ -245,7 +262,8 @@
             </thead>
         </table>
         <footer>
-            <p>&copy; 2023 MONG-THE Bruce. Tous droits réservés.</p>
+            <p>&copy; 2023 MONG-THE Bruce. All Rights Reserved. / brucemongthe13@gmail.com /
+                <a href="https://github.com/BruceMong">github </a></p>
         </footer>
     </body>
     <script type="module" src="/main.js"></script>

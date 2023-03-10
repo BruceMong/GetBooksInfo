@@ -1,17 +1,13 @@
-import './style.css'
-
-
-
-
-
-
-const apiKeyInput = document.getElementById('apikey');
 const input = document.getElementById('search-text');
 const button = document.getElementById('search-button');
 const searchContainer = document.getElementById('search-container');
 const form = document.getElementById('form');
 const langRestrictInput = document.getElementById('langRestrict')
 const itemNumberInput = document.getElementById('itemNumber')
+const startIndexInput = document.getElementById('startIndex')
+const progressBar = document.querySelector('#loader .progress-bar');
+
+
 var table = null
 
 
@@ -31,26 +27,24 @@ document.querySelector('form').addEventListener('submit', function(event) {
 
 async function getBooks() {
     const maxResults = 40; // Nombre maximum de résultats par requête
-    let startIndex = 0; // Indice de départ pour les résultats
+    let startIndex = +startIndexInput.value; // Indice de départ pour les résultats
     let totalItems = itemNumberInput.value; // Nombre total de résultats (initialisé à une valeur très grande)
     let books = []; // Tableau pour stocker les livres récupérés
     const keyword = input.value
     const langRestrict = langRestrictInput.value
-    console.log(langRestrict)
-    let test = 0;
-    const apiKey = apiKeyInput.value
-    if (apiKey == "") return
+
 
     while (startIndex < totalItems) {
+
+
+
         // Faire une requête à l'API Google Books avec le mot clé, la clé API et les paramètres de pagination
         try {
-            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&startIndex=${startIndex}&maxResults=${maxResults}&langRestrict=${langRestrict}&key=${apiKey}`);
+            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${keyword}&startIndex=${startIndex}&maxResults=${maxResults}&langRestrict=${langRestrict}`);
             const data = await response.json();
             if (data.items === undefined)
                 break;
-            test++
-            console.log(test)
-            console.log(data)
+            //console.log(data)
 
 
             // Vérifier si la réponse contient des résultats
@@ -77,14 +71,18 @@ async function getBooks() {
 
             // Mettre à jour l'indice de départ pour les résultats suivants
             startIndex += maxResults;
+            // Mettre à jour la barre de progression
+            const percentComplete = Math.round((startIndex / totalItems) * 100);
+            progressBar.style.width = `${percentComplete}%`;
+            progressBar.style.display = "block"
+            progressBar.setAttribute('aria-valuenow', percentComplete);
 
         } catch (e) {
             console.log(e)
         }
     }
-    console.log(books)
+    progressBar.style.display = "none"
     displayBooksInDataTable(books)
-        //return books;
     return
 }
 
